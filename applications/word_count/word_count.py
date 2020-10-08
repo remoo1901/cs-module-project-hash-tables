@@ -1,27 +1,23 @@
 def word_count(s):
-    # need cache consisting of words + amount of times word occurs, must be sorted by freq
     cache = {}
-    # case doesn't effect word count, so lowercase all the words
-    words_lowercased = s.lower()
-    # ignore chars
-    ignored_chars = '" : ; , . - + = / \ | [ ] { } ( ) * ^ &'.split(" ")
-    # iterate through string
-    for chars in ignored_chars:
-        # replace all non words with space
-        words_lowercased = words_lowercased.replace(chars, "")
-    for words in words_lowercased.split():
-        print(words)
-        # continue if iterating through space
-        if words == "":
+    ignored = '" : ; , . - + = / \ | [ ] { } ( ) * ^ &'.split(" ")
+    word_lower_case = s.lower()
+
+
+    for chr in ignored:
+        word_lower_case =word_lower_case.replace(chr, "")
+
+    for word in word_lower_case.split():
+        if word == " ":
             continue
-        if words not in cache:
-            cache[words] = 1
+        elif word in cache:
+            cache[word] += 1
         else:
-            cache[words] += 1
+            cache[word] = 1
+
     return cache
-    # only count words, ignore grammar
-    # if " " or non-letter than push everything between last " " or non letter into cache
-    # return cache
+        
+
 
 if __name__ == "__main__":
     print(word_count(""))
